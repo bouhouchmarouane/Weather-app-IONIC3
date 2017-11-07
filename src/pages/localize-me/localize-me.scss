@@ -1,0 +1,26 @@
+page-localize-me {
+  .bg-grey{
+    ion-item{
+      background: rgba(0,0,0,0.4);
+      color: white;
+      height: 50px;
+      .icon-weather{
+        height: 40px;
+        width: 40px;
+        border-radius: 5px;
+      }
+      .icon-image{
+        background: rgba(255,255,255,0.4);
+      }
+    }
+  }
+  .temp{
+    font-size: 500%;
+    position: relative;
+    top:-25px;
+    display: inline;
+    ion-list{
+      display: inline;
+    }
+  }
+}
