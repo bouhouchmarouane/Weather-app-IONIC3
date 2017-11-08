@@ -1,7 +1,7 @@
 page-localize-me {
   .bg-grey{
     ion-item{
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.6);
       color: white;
       height: 50px;
       .icon-weather{
@@ -16,11 +16,12 @@ page-localize-me {
   }
   .temp{
     font-size: 500%;
-    position: relative;
-    top:-25px;
-    display: inline;
-    ion-list{
-      display: inline;
-    }
+    /*position: relative;
+    top:-25px;*/
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+  ion-content{
+    background-color: #3BAEDA;
   }
 }

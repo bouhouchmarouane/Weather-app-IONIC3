@@ -6,7 +6,17 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>{{apiResponse?.name}} - {{apiResponse?.sys.country}}</ion-title>
+    <ion-title>{{WeatherApiResponse?.name}} - {{WeatherApiResponse?.sys.country}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="changeBgImage()" *ngIf="nb_images > 1">
+        <ion-icon name="images"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only >
+        <ion-icon name="star-outline"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only (click)="getInfos()">
         <ion-icon name="refresh"></ion-icon>
@@ -15,45 +25,52 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content [style.background]="nb_images? 'url(' + bgImage + ')' : '#3BAEDA'">
+  {{bgImageIndex}}/{{nb_images}}
   <div>
     <p text-center>{{today}}</p>
-    <!--<p text-center>{{apiResponse?.dt | date:'fullDate'}}</p>-->
     <i class="wi wi-day-lightning"></i>
   </div>
   <ion-list class="bg-grey">
     <ion-item>
-      <ion-icon item-start>
-        <img src='https://openweathermap.org/img/w/{{apiResponse?.weather[0].icon}}.png' class="icon-weather icon-image"/>
+      <ion-icon *ngIf="WeatherApiResponse" item-start>
+        <img src='https://openweathermap.org/img/w/{{WeatherApiResponse?.weather[0].icon}}.png' class="icon-weather icon-image"/>
       </ion-icon>
-        {{apiResponse?.weather[0].main}}
+        {{WeatherApiResponse?.weather[0].main}}
       <ion-note item-end>
-        {{apiResponse?.weather[0].description}}
+        {{WeatherApiResponse?.weather[0].description}}
       </ion-note>
     </ion-item>
     <ion-item>
       <ion-icon name="arrow-round-up" item-start class="icon-weather"></ion-icon>
       Max. temp.
       <ion-note item-end>
-        {{convert_temp(apiResponse?.main.temp_max,'c')}}°C
+        {{convert_temp(WeatherApiResponse?.main.temp_max,'c')}}°C
       </ion-note>
     </ion-item>
     <ion-item>
       <ion-icon name="arrow-round-down" item-start class="icon-weather"></ion-icon>
       Min. temp.
       <ion-note item-end>
-        {{convert_temp(apiResponse?.main.temp_min,'c')}}°C
+        {{convert_temp(WeatherApiResponse?.main.temp_min,'c')}}°C
       </ion-note>
     </ion-item>
     <ion-item>
       <ion-icon name="water" item-start class="icon-weather"></ion-icon>
       Humidity
       <ion-note item-end>
-        {{apiResponse?.main.humidity}}%
+        {{WeatherApiResponse?.main.humidity}}%
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="water" item-start class="icon-weather"></ion-icon>
+      Pressure
+      <ion-note item-end>
+        {{WeatherApiResponse?.main.pressure}}%
       </ion-note>
     </ion-item>
   </ion-list>
   <div class="temp">
-    {{convert_temp(apiResponse?.main.temp,'c')}}°C
+    {{convert_temp(WeatherApiResponse?.main.temp,'c')}}°C
   </div>
 </ion-content>

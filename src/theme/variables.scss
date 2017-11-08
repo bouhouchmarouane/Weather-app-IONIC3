@@ -42,7 +42,8 @@ $colors: (
   blue-lighten-4: #bbdefb,
   blue-darken-4: #0d47a1,
   blue-lighten-3:#90caf9,
-  blue-accent-1:#82b1ff
+  blue-accent-1:#82b1ff,
+  bg-color: #3BAEDA
 );
 
 
@@ -92,8 +93,9 @@ $colors: (
 @import "noto-sans";
 
 //overrided variables
-$background-color: #3BAEDA;
-//$tabs-background:color($colors, blue-darken-3);
+//$background-color: #3BAEDA;
 $text-color: white;
 $toolbar-background: #3BAEDA;
 $toolbar-md-height: 20px;
+$tabs-md-tab-color-active: #3BAEDA;
+

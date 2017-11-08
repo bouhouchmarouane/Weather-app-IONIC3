@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {LocalizeMePage} from "../pages/localize-me/localize-me";
 import { WeatherProvider } from '../providers/weather/weather';
 import {HttpModule} from "@angular/http";
+import { CitiesImagesProvider } from '../providers/cities-images/cities-images';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {HttpModule} from "@angular/http";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherProvider
+    WeatherProvider,
+    CitiesImagesProvider
   ]
 })
 export class AppModule {}
