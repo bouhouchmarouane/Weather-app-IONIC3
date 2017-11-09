@@ -12,6 +12,7 @@ import {HttpModule} from "@angular/http";
 import { CitiesImagesProvider } from '../providers/cities-images/cities-images';
 import {IonicStorageModule} from "@ionic/storage";
 import {FavoritesPage} from "../pages/favorites/favorites";
+import { FavoriteProvider } from '../providers/favorite/favorite';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {FavoritesPage} from "../pages/favorites/favorites";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WeatherProvider,
-    CitiesImagesProvider
+    CitiesImagesProvider,
+    FavoriteProvider
   ]
 })
 export class AppModule {}

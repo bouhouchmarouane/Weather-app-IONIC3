@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {WeatherProvider} from "../../providers/weather/weather";
 import {CitiesImagesProvider} from "../../providers/cities-images/cities-images";
 import {Storage} from "@ionic/storage";
+import {FavoriteProvider} from "../../providers/favorite/favorite";
 
 
 /**
@@ -25,17 +26,16 @@ export class LocalizeMePage {
   private nb_images: number = 0;
   private bgImage:string;
   private city;
-  private favorite: boolean;
-  private favCities = [];
-  private test ;
+  private city_id;
+  private isFavorite: boolean;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public weatherProvider: WeatherProvider,
               public citiesImagesProvider: CitiesImagesProvider,
+              public favoriteProvider: FavoriteProvider,
               private storage: Storage) {
     this.getInfos();
-    //this.favCities = this.storage.get('favCities');
   }
 
   getInfos(){
@@ -50,6 +50,10 @@ export class LocalizeMePage {
             if(response.name != this.city){
               this.city = response.name;
               this.setBgImage(this.city);
+              this.city_id = response.id;
+              this.favoriteProvider.isFavorite(this.city_id).then(isFav => {
+                this.isFavorite = isFav;
+              })
             }
           });
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -90,12 +94,19 @@ export class LocalizeMePage {
     }
   }
 
-  toggleFavorite(){
-    this.favCities.push(this.city);
-    this.storage.set('favCities', JSON.stringify(this.favCities))
-    console.log(this.storage.get('favCities'));
-    this.test = JSON.stringify(this.storage.get('favCities'));
-    console.log('test');
-    console.log(this.test);
+  favoriteCity(){
+    this.favoriteProvider.favoriteCity(this.city_id).then(() => {
+      this.isFavorite = true;
+      this.favoriteProvider.getAllFavoriteCities().then(resp => console.log(resp));
+    });
   }
+
+  unfavoriteCity(){
+    this.favoriteProvider.unfavoriteCity(this.city_id).then(() => {
+      this.isFavorite = false;
+      this.favoriteProvider.getAllFavoriteCities().then(resp => console.log(resp));
+    });
+  }
+
+
 }
