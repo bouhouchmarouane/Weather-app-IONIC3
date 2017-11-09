@@ -93,9 +93,10 @@ $colors: (
 @import "noto-sans";
 
 //overrided variables
-//$background-color: #3BAEDA;
+$background-color: #3BAEDA;
 $text-color: white;
 $toolbar-background: #3BAEDA;
 $toolbar-md-height: 20px;
-$tabs-md-tab-color-active: #3BAEDA;
+$tabs-md-tab-color-active: #fff;
+$tabs-background: #3BAEDA
 

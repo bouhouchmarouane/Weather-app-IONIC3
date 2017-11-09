@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {WeatherProvider} from "../../providers/weather/weather";
 import {CitiesImagesProvider} from "../../providers/cities-images/cities-images";
+import {Storage} from "@ionic/storage";
 
 
 /**
@@ -28,7 +29,8 @@ export class LocalizeMePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public weatherProvider: WeatherProvider,
-              public citiesImagesProvider: CitiesImagesProvider) {
+              public citiesImagesProvider: CitiesImagesProvider,
+              private storage: Storage) {
     this.getInfos();
   }
 
@@ -41,8 +43,10 @@ export class LocalizeMePage {
           .subscribe(response => {
             this.bgImageIndex = 0;
             this.WeatherApiResponse = response;
-            this.city = response.name;
-            this.setBgImage(this.city);
+            if(response.name != this.city){
+              this.city = response.name;
+              this.setBgImage(this.city);
+            }
           });
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         this.today = new Date(timestamp).toLocaleString('en-US', options);
@@ -50,6 +54,7 @@ export class LocalizeMePage {
       function (err) {
         console.log(err);
       });
+    this.setFavorite();
   }
 
   convert_temp(temp_source: number, to: string): number{
@@ -80,5 +85,9 @@ export class LocalizeMePage {
       else this.bgImageIndex++;
       this.bgImage = this.imagesApiResponse.hits[this.bgImageIndex].webformatURL;
     }
+  }
+
+  setFavorite(){
+
   }
 }

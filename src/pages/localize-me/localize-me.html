@@ -26,10 +26,10 @@
 </ion-header>
 
 <ion-content [style.background]="nb_images? 'url(' + bgImage + ')' : '#3BAEDA'">
-  {{bgImageIndex}}/{{nb_images}}
-  <div>
-    <p text-center>{{today}}</p>
-    <i class="wi wi-day-lightning"></i>
+  <div class="date">
+    <p text-center>{{today}}
+      {{bgImageIndex}}/{{nb_images}}
+    </p>
   </div>
   <ion-list class="bg-grey">
     <ion-item>
