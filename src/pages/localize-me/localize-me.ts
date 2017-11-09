@@ -25,6 +25,9 @@ export class LocalizeMePage {
   private nb_images: number = 0;
   private bgImage:string;
   private city;
+  private favorite: boolean;
+  private favCities = [];
+  private test ;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -32,6 +35,7 @@ export class LocalizeMePage {
               public citiesImagesProvider: CitiesImagesProvider,
               private storage: Storage) {
     this.getInfos();
+    //this.favCities = this.storage.get('favCities');
   }
 
   getInfos(){
@@ -54,7 +58,6 @@ export class LocalizeMePage {
       function (err) {
         console.log(err);
       });
-    this.setFavorite();
   }
 
   convert_temp(temp_source: number, to: string): number{
@@ -87,7 +90,12 @@ export class LocalizeMePage {
     }
   }
 
-  setFavorite(){
-
+  toggleFavorite(){
+    this.favCities.push(this.city);
+    this.storage.set('favCities', JSON.stringify(this.favCities))
+    console.log(this.storage.get('favCities'));
+    this.test = JSON.stringify(this.storage.get('favCities'));
+    console.log('test');
+    console.log(this.test);
   }
 }
